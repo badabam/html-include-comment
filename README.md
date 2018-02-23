@@ -18,20 +18,20 @@ specified file content inline. The comments are getting replaced with
 the file contents.
 
 ```html
-&lt;html>
-  &lt;head>
-    &lt;style>
+<html>
+  <head>
+    <style>
       /* some/inline.css */
-    &lt;/style>
-  &lt;/head>
-  &lt;body>
-    &lt;!-- partials/header.html -->
-    &lt;!-- some/inline.svg -->
-    &lt;script>
+    </style>
+  </head>
+  <body>
+    <!-- partials/header.html -->
+    <!-- some/inline.svg -->
+    <script>
       /* some/inline.js */
-    &lt;/script>
-  &lt;/body>
-&lt;/html>
+    </script>
+  </body>
+</html>
 ```
 
 It works with both comment styles:
