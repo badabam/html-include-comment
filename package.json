@@ -1,0 +1,32 @@
+{
+  "name": "html-include-comment",
+  "version": "0.0.1",
+  "description":
+    "Simple command line to include any text files via html comment",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:badabam/html-include-comment.git"
+  },
+  "keywords": [
+    "html",
+    "include",
+    "partial",
+    "comment",
+    "cli",
+    "file",
+    "template"
+  ],
+  "author": "Jeremias Erbs <jerry@badabam.de>",
+  "license": "MIT",
+  "homepage":
+    "https://github.com/badabam/html-include-comment#html-include-comment",
+  "bin": {
+    "html-include-comment": "./index.js"
+  },
+  "dependencies": {
+    "commander": "2.14.1",
+    "q": "1.5.1"
+  },
+  "devDependencies": {}
+}
