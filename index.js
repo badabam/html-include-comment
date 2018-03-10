@@ -38,7 +38,7 @@ function getMatches(mainFileData, deferred, targetFile) {
 
   const matches = patterns.reduce((prev, curr) => {
     const currentMatch = mainFileData.match(curr)
-    if (currentMatch.length) {
+    if (currentMatch && currentMatch.length) {
       return prev.concat(currentMatch)
     }
     return prev
