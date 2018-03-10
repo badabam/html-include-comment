@@ -1,6 +1,6 @@
 {
   "name": "html-include-comment",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Very basic command line tool to include any text file via code-comment",
   "main": "index.js",
   "repository": {
