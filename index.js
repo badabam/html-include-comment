@@ -50,8 +50,13 @@ function getMatches(mainFileData, deferred, targetFile) {
   matches.forEach(match => {
     const partialPath = match.split(' ')[1]
     const srcPath = path.dirname(path.join(process.cwd(), srcFile))
+    const fullPartialPath = path.join(srcPath, partialPath)
+    const fileExists = fs.existsSync(fullPartialPath)
+    if (!fileExists) {
+      return
+    } // early out
 
-    const p = fs_readFile(path.join(srcPath, partialPath), 'utf8')
+    const p = fs_readFile(fullPartialPath, 'utf8')
 
     p.done(partialData => {
       mainFileData = mainFileData.replace(match, partialData)
@@ -62,11 +67,9 @@ function getMatches(mainFileData, deferred, targetFile) {
   })
 
   return Q.all(promises).done(() => {
-    fs_writeFile(targetFile, mainFileData)
-      .done(() => {
-        program.silent || console.log(`Rendered ${targetFile}`)
-        deferred.resolve()
-      })
-      .catch(err => console.log(`Can't write file ${targetFile}.`))
+    fs_writeFile(targetFile, mainFileData).done(() => {
+      program.silent || console.log(`Rendered ${targetFile}`)
+      deferred.resolve()
+    })
   })
 }
