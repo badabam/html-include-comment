@@ -24,11 +24,9 @@ renderPage(srcFile, targetFile)
 
 function renderPage(srcFile, targetFile) {
   const deferred = Q.defer()
-  fs_readFile(srcFile, 'utf-8')
-    .done(data => {
-      getMatches(data, deferred, targetFile)
-    })
-    .catch(err => console.log(err.message))
+  fs_readFile(srcFile, 'utf-8').done(data => {
+    getMatches(data, deferred, targetFile)
+  })
 
   return deferred.promise
 }
