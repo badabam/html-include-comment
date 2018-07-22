@@ -24,9 +24,11 @@ renderPage(srcFile, targetFile)
 
 function renderPage(srcFile, targetFile) {
   const deferred = Q.defer()
-  fs_readFile(srcFile, 'utf-8').done(data => {
-    getMatches(data, deferred, targetFile)
-  })
+  fs_readFile(srcFile, 'utf-8')
+    .done(data => {
+      getMatches(data, deferred, targetFile)
+    })
+    .catch(err => console.log(err.message))
 
   return deferred.promise
 }
@@ -56,13 +58,17 @@ function getMatches(mainFileData, deferred, targetFile) {
     p.done(partialData => {
       mainFileData = mainFileData.replace(match, partialData)
     })
+
+    p.catch(err => console.log(`ERROR: can't handle file ${partialPath}.`))
     promises.push(p)
   })
 
   return Q.all(promises).done(() => {
-    fs_writeFile(targetFile, mainFileData).done(() => {
-      program.silent || console.log(`Rendered ${targetFile}`)
-      deferred.resolve()
-    })
+    fs_writeFile(targetFile, mainFileData)
+      .done(() => {
+        program.silent || console.log(`Rendered ${targetFile}`)
+        deferred.resolve()
+      })
+      .catch(err => console.log(`Can't write file ${targetFile}.`))
   })
 }
